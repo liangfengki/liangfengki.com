@@ -1,0 +1,1760 @@
+/* 导入Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap');
+
+/* 全局样式变量 - Figma设计系统 */
+:root {
+  /* 颜色系统 */
+  --primary-color: #546E7A;       /* 深空灰 */
+  --primary-light: #819CA9;       /* 浅空灰 */
+  --primary-dark: #29434E;        /* 暗空灰 */
+  --secondary-color: #F5F5F5;     /* 奶油白 */
+  --accent-color: #78909C;        /* 强调色 */
+  
+  /* 排版 */
+  --heading-font: 'Montserrat', sans-serif;
+  --body-font: 'Open Sans', sans-serif;
+  
+  /* 阴影 */
+  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --elevated-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  
+  /* 圆角 */
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  
+  /* 间距 */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+}
+
+/* 基础样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* 添加平滑滚动效果 */
+}
+
+body {
+    font-family: 'Open Sans', sans-serif; /* 正文字体改为Open Sans */
+    line-height: 1.6;
+    color: #2c3e50; /* 主文字颜色改为深空灰 */
+    background-color: #f5f5f5; /* 背景色改为奶油白 */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif; /* 标题字体改为Montserrat */
+    font-weight: 600;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease; /* 添加所有链接的过渡效果 */
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* 导航栏样式 */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.8rem 8%; /* 增加内边距，增强留白效果 */
+    z-index: 1000;
+    transition: all 0.3s ease;
+    background-color: rgba(245, 245, 245, 0.95); /* 背景色改为奶油白半透明 */
+    box-shadow: 0 2px 10px rgba(44, 62, 80, 0.1); /* 阴影颜色调整为主色调 */
+}
+
+.logo a {
+    font-family: 'Montserrat', sans-serif; /* 使用Montserrat字体 */
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2c3e50; /* 改为深空灰 */
+    letter-spacing: 1px;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+}
+
+.nav-menu li {
+    margin-left: 2.5rem; /* 增加间距，增强留白效果 */
+}
+
+.nav-menu a {
+    font-family: 'Montserrat', sans-serif; /* 导航菜单使用Montserrat字体 */
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-transform: uppercase; /* 大写字母增强极简风格 */
+    letter-spacing: 0.5px; /* 增加字母间距 */
+    color: #5a6c7e; /* 稍微淡化的深空灰 */
+    padding: 0.5rem 0;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #2c3e50; /* 改为深空灰 */
+    transition: width 0.3s ease;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+    color: #2c3e50; /* 改为深空灰 */
+}
+
+.nav-menu a:hover::after,
+.nav-menu a.active::after {
+    width: 100%;
+}
+
+.nav-toggle {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #2c3e50; /* 改为深空灰 */
+}
+
+/* 轮播图样式 */
+.slider {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.slides {
+    width: 100%;
+    height: 100%;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease;
+    z-index: 1;
+}
+
+.slide.active {
+    opacity: 1;
+    z-index: 2;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.9); /* 轻微降低亮度，增强低饱和度效果 */
+}
+
+.slide-content {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+    max-width: 600px;
+    color: #f5f5f5; /* 改为奶油白 */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    z-index: 3;
+}
+
+.slide-content h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem; /* 增加间距 */
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s forwards 0.5s;
+    letter-spacing: 1px; /* 增加字母间距 */
+}
+
+.slide-content p {
+    font-family: 'Open Sans', sans-serif; 
+    font-size: 1.2rem;
+    font-weight: 300; /* 更轻的字重增强极简风格 */
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s forwards 0.8s;
+    letter-spacing: 0.5px; /* 增加字母间距 */
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slide-controls {
+    position: absolute;
+    bottom: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 3rem; /* 增加内边距 */
+    z-index: 10;
+}
+
+.slide-controls button {
+    background: rgba(44, 62, 80, 0.3); /* 使用深空灰，但半透明 */
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    color: #f5f5f5; /* 改为奶油白 */
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.slide-controls button:hover {
+    background: rgba(44, 62, 80, 0.6); /* 悬停时加深背景色 */
+    transform: scale(1.05); /* 悬停时放大 */
+}
+
+.slide-indicators {
+    position: absolute;
+    bottom: 3rem; /* 增加间距 */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    z-index: 10;
+}
+
+.indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(245, 245, 245, 0.5); /* 使用奶油白，但半透明 */
+    margin: 0 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.indicator.active {
+    background-color: #f5f5f5; /* 改为奶油白 */
+    transform: scale(1.2);
+}
+
+/* 作品集区域样式 */
+.portfolio {
+    padding: 8rem 8% 6rem; /* 增加内边距增强留白 */
+}
+
+.section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 4rem; /* 增加下边距 */
+    position: relative;
+    padding-bottom: 1rem;
+    color: #2c3e50; /* 改为深空灰 */
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px; /* 减小宽度，更加极简 */
+    height: 3px;
+    background-color: #2c3e50; /* 改为深空灰 */
+}
+
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3rem; /* 增加下边距 */
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    border: none;
+    background: none;
+    padding: 0.6rem 1.8rem;
+    margin: 0 0.8rem 1rem;
+    font-size: 0.9rem;
+    text-transform: uppercase; /* 大写字母增强极简风格 */
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    color: #5a6c7e; /* 稍微淡化的深空灰 */
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.filter-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: #2c3e50; /* 改为深空灰 */
+    transition: width 0.3s ease;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    color: #2c3e50; /* 改为深空灰 */
+}
+
+.filter-btn:hover::after,
+.filter-btn.active::after {
+    width: 60%; /* 减小宽度，更加极简 */
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* 稍微增加单元格大小 */
+    gap: 2rem; /* 增加间距 */
+}
+
+.portfolio-item {
+    position: relative;
+    border-radius: 3px; /* 减小边框半径，更加极简 */
+    overflow: hidden;
+    box-shadow: 0 3px 15px rgba(44, 62, 80, 0.1); /* 阴影颜色调整为主色调 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #fff; /* 设置白色背景增强对比 */
+}
+
+.portfolio-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 5px 25px rgba(44, 62, 80, 0.15); /* 悬停时加深阴影 */
+}
+
+.portfolio-item img {
+    width: 100%;
+    height: 320px; /* 增加图片高度使比例更加协调 */
+    object-fit: cover;
+    transition: transform 0.3s ease; /* 改为0.3s的过渡 */
+}
+
+.portfolio-item:hover img {
+    transform: scale(1.05); /* 悬停时放大到105% */
+}
+
+.item-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.8rem; /* 增加内边距 */
+    background: linear-gradient(to top, rgba(44, 62, 80, 0.9), transparent); /* 使用深空灰渐变 */
+    color: #f5f5f5; /* 改为奶油白 */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease; /* 改为0.3s的过渡 */
+}
+
+.portfolio-item:hover .item-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.item-overlay h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.5px;
+}
+
+.item-overlay p {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
+
+/* 页脚样式 */
+footer {
+    text-align: center;
+    padding: 3rem; /* 增加内边距 */
+    background-color: #2c3e50; /* 背景色改为深空灰 */
+    color: #f5f5f5; /* 文字颜色改为奶油白 */
+    margin-top: 4rem;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 992px) {
+    .slide-content h1 {
+        font-size: 2.8rem;
+    }
+    
+    .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .nav-toggle {
+        display: block;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        top: 70px;
+        right: -100%;
+        flex-direction: column;
+        background-color: rgba(245, 245, 245, 0.98); /* 背景色改为奶油白 */
+        width: 80%;
+        height: calc(100vh - 70px);
+        padding: 2rem;
+        box-shadow: -5px 0 15px rgba(44, 62, 80, 0.1); /* 阴影颜色调整为主色调 */
+        transition: right 0.3s ease;
+    }
+    
+    .nav-menu.active {
+        right: 0;
+    }
+    
+    .nav-menu li {
+        margin: 1.5rem 0;
+        text-align: center;
+    }
+    
+    .slide-content {
+        left: 5%;
+        max-width: 90%;
+    }
+    
+    .slide-content h1 {
+        font-size: 2.2rem;
+    }
+    
+    .slide-content p {
+        font-size: 1rem;
+    }
+    
+    .slide-controls button {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .navbar {
+        padding: 1.2rem 5%;
+    }
+    
+    .logo a {
+        font-size: 1.5rem;
+    }
+    
+    .slide-content h1 {
+        font-size: 1.8rem;
+    }
+    
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+}
+
+/* 关于区域样式 */
+.about {
+    padding: 8rem 8% 6rem;
+    background-color: #f0f0f0; /* 稍微深一点的背景色，增加区域对比 */
+}
+
+.about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 4rem;
+    margin-top: 3rem;
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 3px;
+    box-shadow: 0 5px 20px rgba(44, 62, 80, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.about-image:hover img {
+    transform: scale(1.02);
+}
+
+.about-text h3 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.about-text p {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+    color: #3a5169;
+    font-weight: 300;
+}
+
+.skills {
+    margin-top: 2.5rem;
+}
+
+.skill-item {
+    margin-bottom: 1.5rem;
+}
+
+.skill-item h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.skill-bar {
+    height: 6px;
+    background-color: rgba(44, 62, 80, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.skill-level {
+    height: 100%;
+    background-color: #2c3e50;
+    border-radius: 3px;
+    position: relative;
+    transition: width 1s ease-in-out;
+}
+
+/* 联系区域样式 */
+.contact {
+    padding: 8rem 8% 6rem;
+}
+
+.contact-container {
+    max-width: 1200px;
+    margin: 3rem auto 0;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 4rem;
+}
+
+.contact-info {
+    color: #3a5169;
+}
+
+.contact-info p {
+    margin-bottom: 2rem;
+    line-height: 1.8;
+    font-weight: 300;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+}
+
+.info-item i {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(44, 62, 80, 0.05);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    color: #2c3e50;
+    transition: all 0.3s ease;
+}
+
+.info-item:hover i {
+    background-color: #2c3e50;
+    color: #f5f5f5;
+    transform: scale(1.05);
+}
+
+.social-links {
+    display: flex;
+    margin-top: 2rem;
+}
+
+.social-link {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(44, 62, 80, 0.05);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    color: #2c3e50;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    background-color: #2c3e50;
+    color: #f5f5f5;
+    transform: scale(1.05);
+}
+
+.contact-form form {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    border: 1px solid rgba(44, 62, 80, 0.1);
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.8);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
+    color: #2c3e50;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: rgba(44, 62, 80, 0.3);
+    box-shadow: 0 0 0 2px rgba(44, 62, 80, 0.05);
+}
+
+.form-group textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.submit-btn {
+    padding: 1rem 2rem;
+    background-color: #2c3e50;
+    color: #f5f5f5;
+    border: none;
+    border-radius: 3px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: start;
+}
+
+.submit-btn:hover {
+    background-color: #1a2836;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(44, 62, 80, 0.2);
+}
+
+/* 更新页脚样式 */
+.footer-links {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.footer-links a {
+    color: rgba(245, 245, 245, 0.7);
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #f5f5f5;
+}
+
+/* 响应式设计更新 */
+@media screen and (max-width: 992px) {
+    .about-content,
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    
+    .about-image {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .about-text h3 {
+        font-size: 1.8rem;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .about,
+    .contact {
+        padding: 6rem 5% 4rem;
+    }
+    
+    .about-content,
+    .contact-container {
+        gap: 2rem;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+}
+
+/* 作品集区域增强样式 */
+.filter-container {
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+.filter-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+.filter-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.5px;
+}
+
+.view-options {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.view-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 3px;
+    border: 1px solid rgba(44, 62, 80, 0.1);
+    background-color: transparent;
+    color: #5a6c7e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.view-btn.active, .view-btn:hover {
+    background-color: #2c3e50;
+    color: #f5f5f5;
+}
+
+/* 作品网格布局 */
+.portfolio-grid {
+    display: none;
+}
+
+.portfolio-grid.active-view {
+    display: grid;
+}
+
+.details-btn {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: rgba(44, 62, 80, 0.8);
+    color: #f5f5f5;
+    border: none;
+    border-radius: 3px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.portfolio-item:hover .details-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.details-btn:hover {
+    background-color: #2c3e50;
+}
+
+/* 幻灯片视图 */
+.slideshow-view {
+    display: none;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 700px;
+    position: relative;
+}
+
+.slideshow-view.active-view {
+    display: block;
+}
+
+.slideshow-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+    box-shadow: 0 5px 25px rgba(44, 62, 80, 0.1);
+}
+
+.slideshow-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    display: none;
+}
+
+.slideshow-item.active {
+    opacity: 1;
+    display: block;
+}
+
+.slideshow-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background-color: #f5f5f5;
+}
+
+.slideshow-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem;
+    background: linear-gradient(to top, rgba(44, 62, 80, 0.9), transparent);
+    color: #f5f5f5;
+}
+
+.slideshow-info h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.slideshow-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    z-index: 10;
+}
+
+.slideshow-prev, .slideshow-next {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(44, 62, 80, 0.6);
+    border: none;
+    color: #f5f5f5;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slideshow-prev:hover, .slideshow-next:hover {
+    background-color: #2c3e50;
+    transform: scale(1.05);
+}
+
+.slideshow-counter {
+    background-color: rgba(44, 62, 80, 0.6);
+    color: #f5f5f5;
+    padding: 0.5rem 1rem;
+    border-radius: 3px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+}
+
+/* 模态框样式 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 2000;
+    overflow-y: auto;
+    padding: 50px 0;
+}
+
+.modal.show {
+    display: block;
+}
+
+.modal-content {
+    background-color: #f5f5f5;
+    max-width: 1200px;
+    width: 90%;
+    margin: 0 auto;
+    position: relative;
+    border-radius: 3px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+}
+
+.close-modal {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 2rem;
+    color: #2c3e50;
+    cursor: pointer;
+    z-index: 10;
+    line-height: 1;
+    transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+    color: #e74c3c;
+}
+
+.modal-gallery {
+    background-color: #f0f0f0;
+    padding: 2rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-main-image {
+    width: 100%;
+    height: 500px;
+    object-fit: contain;
+    margin-bottom: 1.5rem;
+    border-radius: 3px;
+    background-color: #fff;
+}
+
+.modal-thumbnails {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+}
+
+.thumbnail {
+    width: 80px;
+    height: 80px;
+    border-radius: 3px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    opacity: 0.7;
+    flex-shrink: 0;
+    border: 2px solid transparent;
+}
+
+.thumbnail.active {
+    opacity: 1;
+    border-color: #2c3e50;
+}
+
+.thumbnail:hover {
+    transform: scale(1.05);
+    opacity: 1;
+}
+
+.thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.modal-info {
+    padding: 3rem 2rem;
+    overflow-y: auto;
+}
+
+.modal-info h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.modal-metadata {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    color: #5a6c7e;
+    font-size: 0.95rem;
+}
+
+.modal-description {
+    margin-bottom: 2rem;
+    line-height: 1.8;
+}
+
+.modal-description p {
+    color: #3a5169;
+    font-weight: 300;
+}
+
+.modal-details {
+    border-top: 1px solid rgba(44, 62, 80, 0.1);
+    padding-top: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.detail-item {
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.detail-label {
+    width: 100px;
+    font-weight: 600;
+    color: #2c3e50;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+}
+
+.detail-value {
+    flex: 1;
+    color: #3a5169;
+    font-weight: 300;
+}
+
+.modal-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+.tag {
+    padding: 0.4rem 0.8rem;
+    background-color: rgba(44, 62, 80, 0.05);
+    border-radius: 3px;
+    font-size: 0.85rem;
+    color: #2c3e50;
+    transition: all 0.3s ease;
+}
+
+.tag:hover {
+    background-color: rgba(44, 62, 80, 0.1);
+}
+
+/* 技能标签 */
+.skill-tags {
+    margin: 2rem 0;
+}
+
+.skill-tags h4, .tools h4, .professional-background h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+/* 工具图标 */
+.tools {
+    margin: 2rem 0;
+}
+
+.tool-icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.tool-icon {
+    display: flex;
+    align-items: center;
+    padding: 0.6rem 1rem;
+    background-color: rgba(44, 62, 80, 0.05);
+    border-radius: 3px;
+    font-size: 0.9rem;
+    color: #2c3e50;
+    transition: all 0.3s ease;
+}
+
+.tool-icon i {
+    margin-right: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.tool-icon:hover {
+    background-color: #2c3e50;
+    color: #f5f5f5;
+    transform: translateY(-3px);
+}
+
+.professional-background {
+    margin: 2rem 0;
+}
+
+.professional-background p {
+    line-height: 1.8;
+    color: #3a5169;
+    font-weight: 300;
+}
+
+/* 响应式调整 */
+@media screen and (max-width: 992px) {
+    .modal-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .modal-gallery {
+        padding: 1.5rem;
+    }
+    
+    .modal-main-image {
+        height: 400px;
+    }
+    
+    .modal-info {
+        padding: 2rem;
+    }
+    
+    .filter-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+@media screen and (max-width:.768px) {
+    .filter-buttons {
+        justify-content: flex-start;
+    }
+    
+    .slideshow-view {
+        height: 500px;
+    }
+    
+    .slideshow-info h3 {
+        font-size: 1.5rem;
+    }
+    
+    .modal-main-image {
+        height: 300px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .slideshow-view {
+        height: 400px;
+    }
+    
+    .modal-content {
+        width: 95%;
+    }
+    
+    .modal-gallery {
+        padding: 1rem;
+    }
+    
+    .modal-info {
+        padding: 1.5rem;
+    }
+    
+    .modal-info h2 {
+        font-size: 1.8rem;
+    }
+    
+    .slideshow-prev, .slideshow-next {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .tool-icons {
+        gap: 0.5rem;
+    }
+}
+
+/* 瀑布流布局样式 */
+.waterfall-container {
+    display: none;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1800px; /* 增加最大宽度以适应9列 */
+}
+
+.waterfall-container.active-view {
+    display: flex;
+    gap: 1.2rem; /* 减小间距以适应更多列 */
+}
+
+.waterfall-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem; /* 保持与水平间距一致 */
+}
+
+.waterfall-item {
+    background-color: #fff;
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: 0 3px 15px rgba(44, 62, 80, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    break-inside: avoid; /* 防止项目被分割 */
+}
+
+.waterfall-image {
+    position: relative;
+    overflow: hidden;
+    background-color: #f0f0f0;
+    width: 100%;
+}
+
+.waterfall-image img {
+    width: 100%;
+    display: block;
+    height: auto; /* 自动根据宽度调整高度 */
+    object-fit: cover; /* 保持图片比例，覆盖容器 */
+    transition: transform 0.5s ease;
+}
+
+.waterfall-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 25px rgba(44, 62, 80, 0.15);
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(44, 62, 80, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.waterfall-item:hover .image-overlay {
+    opacity: 1;
+}
+
+.image-overlay button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(245, 245, 245, 0.9);
+    border: none;
+    color: #2c3e50;
+    margin: 0 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(20px);
+    opacity: 0;
+}
+
+.waterfall-item:hover .image-overlay button {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.preview-btn {
+    transition-delay: 0.1s;
+}
+
+.details-btn {
+    transition-delay: 0.2s;
+}
+
+.image-overlay button:hover {
+    background: #2c3e50;
+    color: #f5f5f5;
+    transform: scale(1.1) !important;
+}
+
+.waterfall-info {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.waterfall-info h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.8rem;
+}
+
+.waterfall-description {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #5a6c7e;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+}
+
+.waterfall-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #8395a7;
+    margin-top: auto;
+}
+
+.waterfall-meta span {
+    display: flex;
+    align-items: center;
+}
+
+.waterfall-meta i {
+    margin-right: 5px;
+}
+
+/* EXIF信息样式 */
+.exif-info {
+    margin: 2rem 0;
+    border-top: 1px solid rgba(44, 62, 80, 0.1);
+    padding-top: 1.5rem;
+}
+
+.exif-info h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    color: #2c3e50;
+}
+
+.exif-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.exif-item {
+    display: flex;
+    align-items: center;
+}
+
+.exif-icon {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(44, 62, 80, 0.05);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    color: #2c3e50;
+    font-size: 1.1rem;
+}
+
+.exif-data {
+    display: flex;
+    flex-direction: column;
+}
+
+.exif-label {
+    font-size: 0.8rem;
+    color: #8395a7;
+    margin-bottom: 0.2rem;
+}
+
+.exif-value {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+/* 图片预览蒙层 */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox.show {
+    display: flex;
+}
+
+.lightbox-img {
+    max-width: 85%;
+    max-height: 85vh;
+    object-fit: contain;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-caption {
+    position: absolute;
+    bottom: 20px;
+    color: #f5f5f5;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2rem;
+    text-align: center;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.close-lightbox {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #f5f5f5;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 2001;
+    transition: color 0.3s ease;
+}
+
+.close-lightbox:hover {
+    color: #e74c3c;
+}
+
+.lightbox-prev,
+.lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    color: #f5f5f5;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-prev {
+    left: 30px;
+}
+
+.lightbox-next {
+    right: 30px;
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* 更新分类筛选按钮样式 */
+.category-filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.view-toggle {
+    margin-left: auto;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.filter-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+    padding: 0 1rem;
+}
+
+/* 响应式调整 */
+@media screen and (max-width: 992px) {
+    .exif-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .lightbox-img {
+        max-width: 90%;
+    }
+    
+    .lightbox-prev {
+        left: 15px;
+    }
+    
+    .lightbox-next {
+        right: 15px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .waterfall-container.active-view {
+        gap: 1rem;
+    }
+    
+    .waterfall-column {
+        gap: 1rem;
+    }
+    
+    .waterfall-info {
+        padding: 1rem;
+    }
+    
+    .exif-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .lightbox-prev,
+    .lightbox-next {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .image-overlay button {
+        width: 36px;
+        height: 36px;
+        font-size: 0.9rem;
+    }
+    
+    .filter-container {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .view-toggle {
+        margin-left: 0;
+    }
+}
+
+/* 添加一些额外的响应式样式 */
+@media screen and (min-width: 1600px) {
+    .waterfall-container {
+        padding: 0 2rem; /* 在大屏幕上添加些内边距 */
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .waterfall-info h3 {
+        font-size: 1.1rem;
+    }
+    
+    .waterfall-description {
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .waterfall-container.active-view {
+        gap: 1rem;
+    }
+    
+    .waterfall-column {
+        gap: 1rem;
+    }
+}
+
+/* 懒加载图片样式 */
+.lazy-image {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    background-color: #f6f6f6;
+}
+
+.lazy-image.loaded {
+    opacity: 1;
+}
+
+/* Figma风格卡片组件 */
+.figma-card {
+    background-color: white;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.figma-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--elevated-shadow);
+}
+
+/* Figma风格按钮 */
+.figma-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    padding: 0.75rem 1.5rem;
+    font-family: var(--heading-font);
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-width: 44px;
+    min-height: 44px;
+}
+
+.figma-button:hover {
+    background-color: var(--primary-dark);
+}
+
+.figma-button.outlined {
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.figma-button.outlined:hover {
+    background-color: rgba(84, 110, 122, 0.08);
+}
+
+/* Figma风格徽章 */
+.figma-badge {
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-size: 0.8rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-weight: 500;
+}
+
+/* 瀑布流项目调整 */
+.waterfall-item {
+    margin-bottom: 20px;
+}
+
+.waterfall-image {
+    position: relative;
+    overflow: hidden;
+    background-color: #f6f6f6;
+}
+
+.waterfall-image img {
+    width: 100%;
+    display: block;
+    transition: transform 0.5s ease;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+}
+
+.waterfall-item:hover .waterfall-image img {
+    transform: scale(1.05);
+}
+
+/* 网格视图项目调整 */
+.portfolio-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 16/9;
+}
+
+/* 针对移动设备的响应式调整 */
+@media (max-width: 768px) {
+    .waterfall-column {
+        width: 100%;
+    }
+    
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+} 

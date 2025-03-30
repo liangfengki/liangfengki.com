@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>摄影与设计作品集</title>
+    
+    <!-- 关键CSS内联 -->
+    <style>
+        /* 首屏关键CSS，减少首次渲染阻塞 */
+        :root {
+          --primary-color: #546E7A;
+          --primary-dark: #29434E;
+          --secondary-color: #F5F5F5;
+          --heading-font: 'Montserrat', sans-serif;
+          --body-font: 'Open Sans', sans-serif;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--body-font);
+            background-color: #fff;
+            color: #333;
+            opacity: 0;
+            animation: fadeIn 0.6s forwards;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1 }
+        }
+        .navbar {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: var(--heading-font);
+        }
+        .slider {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            margin-top: 60px;
+        }
+    </style>
+    
+    <!-- 资源预加载 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- 预加载字体图标 -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+    
+    <!-- 预加载CSS -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" as="style">
+    
+    <!-- 异步加载CSS -->
+    <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    </noscript>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    </noscript>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="#">我的作品集</a>
+        </div>
+        <div class="nav-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="#" class="active">首页</a></li>
+            <li><a href="#portfolio">作品集</a></li>
+            <li><a href="#about">关于</a></li>
+            <li><a href="#contact">联系</a></li>
+        </ul>
+    </nav>
+
+    <!-- 轮播图区域 -->
+    <section class="slider">
+        <div class="slides">
+            <div class="slide active">
+                <img src="images/photography/landscape/hero1.jpg" alt="摄影作品">
+                <div class="slide-content">
+                    <h1>视觉讲述者</h1>
+                    <p>通过镜头捕捉世界的美丽与故事</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="images/photography/portrait/hero2.jpg" alt="人像摄影">
+                <div class="slide-content">
+                    <h1>创意设计</h1>
+                    <p>将想法转化为视觉艺术</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="images/design/branding/hero3.jpg" alt="设计作品">
+                <div class="slide-content">
+                    <h1>独特视角</h1>
+                    <p>每一帧都是一个故事的开始</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide-controls">
+            <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
+            <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <div class="slide-indicators">
+            <span class="indicator active"></span>
+            <span class="indicator"></span>
+            <span class="indicator"></span>
+        </div>
+    </section>
+
+    <!-- 作品集区域 -->
+    <section id="portfolio" class="portfolio">
+        <h2 class="section-title">作品集</h2>
+        
+        <!-- 简化筛选系统 -->
+        <div class="filter-container">
+            <div class="category-filters">
+                <button class="filter-btn active" data-filter="all">全部</button>
+                <button class="filter-btn" data-filter="photography">摄影</button>
+                <button class="filter-btn" data-filter="design">设计</button>
+            </div>
+            
+            <div class="view-toggle">
+                <button class="view-btn active" data-view="waterfall"><i class="fas fa-th-large"></i> 瀑布流</button>
+                <button class="view-btn" data-view="grid"><i class="fas fa-th"></i> 网格</button>
+            </div>
+        </div>
+        
+        <!-- 作品瀑布流布局 -->
+        <div class="waterfall-container active-view" id="waterfall-view">
+            <!-- 作品瀑布流将由JavaScript动态生成 -->
+        </div>
+        
+        <!-- 作品网格布局(备选视图) -->
+        <div class="portfolio-grid" id="grid-view">
+            <!-- 网格布局将由JavaScript动态生成 -->
+        </div>
+        
+        <!-- 作品详情模态框 -->
+        <div class="modal" id="details-modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <div class="modal-gallery">
+                    <img src="" alt="作品大图" class="modal-main-image">
+                    <div class="modal-thumbnails">
+                        <!-- 缩略图将动态生成 -->
+                    </div>
+                </div>
+                <div class="modal-info">
+                    <h2 id="modal-title"></h2>
+                    <div class="modal-metadata">
+                        <span class="modal-category"></span>
+                        <span class="modal-date"></span>
+                    </div>
+                    <div class="modal-description">
+                        <p id="modal-desc"></p>
+                    </div>
+                    
+                    <!-- EXIF信息区域 -->
+                    <div class="exif-info" id="exif-container">
+                        <h3>技术参数</h3>
+                        <div class="exif-grid">
+                            <div class="exif-item">
+                                <div class="exif-icon"><i class="fas fa-camera"></i></div>
+                                <div class="exif-data">
+                                    <span class="exif-label">相机</span>
+                                    <span class="exif-value" id="exif-camera">-</span>
+                                </div>
+                            </div>
+                            <div class="exif-item">
+                                <div class="exif-icon"><i class="fas fa-eye"></i></div>
+                                <div class="exif-data">
+                                    <span class="exif-label">镜头</span>
+                                    <span class="exif-value" id="exif-lens">-</span>
+                                </div>
+                            </div>
+                            <div class="exif-item">
+                                <div class="exif-icon"><i class="fas fa-sliders-h"></i></div>
+                                <div class="exif-data">
+                                    <span class="exif-label">光圈</span>
+                                    <span class="exif-value" id="exif-aperture">-</span>
+                                </div>
+                            </div>
+                            <div class="exif-item">
+                                <div class="exif-icon"><i class="fas fa-stopwatch"></i></div>
+                                <div class="exif-data">
+                                    <span class="exif-label">快门速度</span>
+                                    <span class="exif-value" id="exif-shutter">-</span>
+                                </div>
+                            </div>
+                            <div class="exif-item">
+                                <div class="exif-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                <div class="exif-data">
+                                    <span class="exif-label">ISO</span>
+                                    <span class="exif-value" id="exif-iso">-</span>
+                                </div>
+                            </div>
+                            <div class="exif-item">
+                                <div class="exif-icon"><i class="fas fa-compress-arrows-alt"></i></div>
+                                <div class="exif-data">
+                                    <span class="exif-label">焦距</span>
+                                    <span class="exif-value" id="exif-focal">-</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-details">
+                        <div class="detail-item">
+                            <span class="detail-label">位置</span>
+                            <span class="detail-value" id="modal-location"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">创作日期</span>
+                            <span class="detail-value" id="modal-date-detail"></span>
+                        </div>
+                    </div>
+                    <div class="modal-tags">
+                        <!-- 标签将动态生成 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 图片预览蒙层 -->
+        <div class="lightbox" id="lightbox">
+            <span class="close-lightbox">&times;</span>
+            <img class="lightbox-img" id="lightbox-img">
+            <div class="lightbox-caption" id="lightbox-caption"></div>
+            <button class="lightbox-prev"><i class="fas fa-chevron-left"></i></button>
+            <button class="lightbox-next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+
+    </section>
+
+    <!-- 关于区域 -->
+    <section id="about" class="about">
+        <div class="about-container">
+            <h2 class="section-title">关于我</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://source.unsplash.com/random/600x800/?photographer" alt="摄影师照片">
+                </div>
+                <div class="about-text">
+                    <h3>创作者 & 设计师</h3>
+                    <p>欢迎来到我的摄影与设计作品集。我是一名热衷于捕捉美丽瞬间和创造视觉故事的摄影师和设计师。</p>
+                    <p>我的作品风格专注于极简主义和情感表达，通过光影、构图和色彩来传达独特的视觉语言。</p>
+                    
+                    <!-- 专业背景 -->
+                    <div class="professional-background">
+                        <h4>专业背景</h4>
+                        <p>拥有10年的摄影经验和5年的设计行业工作经历，曾为多家知名品牌提供创意服务。我的作品曾在多个国际摄影比赛中获奖，并在各大艺术展览中展出。</p>
+                    </div>
+                    
+                    <!-- 技能标签 -->
+                    <div class="skill-tags">
+                        <h4>专业领域</h4>
+                        <div class="tags">
+                            <span class="tag">风景摄影</span>
+                            <span class="tag">人像摄影</span>
+                            <span class="tag">建筑摄影</span>
+                            <span class="tag">品牌设计</span>
+                            <span class="tag">用户界面</span>
+                            <span class="tag">印刷设计</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 擅长工具 -->
+                    <div class="tools">
+                        <h4>专业工具</h4>
+                        <div class="tool-icons">
+                            <div class="tool-icon" title="Adobe Photoshop"><i class="fab fa-adobe"></i> Photoshop</div>
+                            <div class="tool-icon" title="Adobe Illustrator"><i class="fab fa-adobe"></i> Illustrator</div>
+                            <div class="tool-icon" title="Adobe InDesign"><i class="fab fa-adobe"></i> InDesign</div>
+                            <div class="tool-icon" title="Figma"><i class="fab fa-figma"></i> Figma</div>
+                            <div class="tool-icon" title="Lightroom"><i class="fas fa-adjust"></i> Lightroom</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 技能条 -->
+                    <div class="skills">
+                        <h4>专业技能</h4>
+                        <div class="skill-item">
+                            <h4>摄影</h4>
+                            <div class="skill-bar"><div class="skill-level" style="width: 95%;"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <h4>平面设计</h4>
+                            <div class="skill-bar"><div class="skill-level" style="width: 90%;"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <h4>UI/UX设计</h4>
+                            <div class="skill-bar"><div class="skill-level" style="width: 85%;"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <h4>图像处理</h4>
+                            <div class="skill-bar"><div class="skill-level" style="width: 92%;"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系区域 -->
+    <section id="contact" class="contact">
+        <h2 class="section-title">联系我</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <p>如果您对我的作品感兴趣，或者想要了解更多有关合作的信息，请随时与我联系。</p>
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>email@example.com</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+86 123 4567 8910</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>北京市, 中国</span>
+                </div>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-weixin"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-weibo"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-behance"></i></a>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <input type="text" placeholder="您的姓名" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="您的邮箱" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="主题">
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="您的留言" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">发送消息</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 摄影与设计作品集. 保留所有权利.</p>
+        <div class="footer-links">
+            <a href="#">隐私政策</a>
+            <a href="#">使用条款</a>
+        </div>
+    </footer>
+
+    <script>
+        // 导航栏响应式切换
+        document.querySelector('.nav-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-menu').classList.toggle('active');
+        });
+
+        // 轮播图功能
+        const slides = document.querySelectorAll('.slide');
+        const indicators = document.querySelectorAll('.indicator');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            
+            slides[index].classList.add('active');
+            indicators[index].classList.add('active');
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        // 设置自动轮播
+        let slideInterval = setInterval(nextSlide, 5000);
+
+        // 绑定事件监听器
+        nextBtn.addEventListener('click', () => {
+            clearInterval(slideInterval);
+            nextSlide();
+            slideInterval = setInterval(nextSlide, 5000);
+        });
+
+        prevBtn.addEventListener('click', () => {
+            clearInterval(slideInterval);
+            prevSlide();
+            slideInterval = setInterval(nextSlide, 5000);
+        });
+
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                clearInterval(slideInterval);
+                showSlide(index);
+                slideInterval = setInterval(nextSlide, 5000);
+            });
+        });
+
+        // Unsplash占位图生成函数
+        function generatePlaceholderUrl(category, width = 1920, height = 1080) {
+            // 添加随机参数避免缓存
+            const randomSeed = Math.floor(Math.random() * 1000000);
+            const keywords = category === 'photography' 
+                ? ['landscape', 'portrait', 'architecture', 'nature', 'street', 'travel', 'night', 'macro'].sort(() => 0.5 - Math.random()).slice(0, 2).join(',')
+                : ['design', 'ui', 'graphic', 'branding', 'poster', 'typography', 'minimal'].sort(() => 0.5 - Math.random()).slice(0, 2).join(',');
+            
+            return `https://source.unsplash.com/random/${width}x${height}/?${keywords}&sig=${randomSeed}`;
+        }
+
+        // 作品集数据(示例数据，实际应用中可通过API获取)
+        const portfolioData = [
+            {
+                id: 1,
+                title: "高山湖泊",
+                category: "photography",
+                description: "在云南香格里拉拍摄的高山湖泊，湖水清澈见底，远处雪山倒映其中。",
+                thumbnail: generatePlaceholderUrl('photography', 800, 1000),
+                images: [
+                    generatePlaceholderUrl('photography', 1920, 1080),
+                    generatePlaceholderUrl('photography', 1920, 1080),
+                    generatePlaceholderUrl('photography', 1920, 1080)
+                ],
+                date: "2023-05-15",
+                location: "云南香格里拉",
+                tags: ["风景", "湖泊", "山脉", "自然"],
+                featured: true,
+                exif: {
+                    camera: "Canon EOS R5",
+                    lens: "RF 24-70mm f/2.8L",
+                    aperture: "f/8.0",
+                    shutter: "1/125s",
+                    iso: "100",
+                    focal: "35mm"
+                }
+            },
+            {
+                id: 2,
+                title: "城市人像",
+                category: "photography",
+                description: "在城市街头拍摄的人像作品，捕捉都市生活中的瞬间表情。",
+                thumbnail: generatePlaceholderUrl('photography', 600, 900),
+                images: [
+                    generatePlaceholderUrl('photography', 1920, 1080),
+                    generatePlaceholderUrl('photography', 1920, 1080),
+                    generatePlaceholderUrl('photography', 1920, 1080)
+                ],
+                date: "2023-03-22",
+                location: "上海南京路",
+                tags: ["人像", "城市", "街拍", "纪实"],
+                exif: {
+                    camera: "Sony A7IV",
+                    lens: "Sony 85mm f/1.4 GM",
+                    aperture: "f/2.0",
+                    shutter: "1/320s",
+                    iso: "400",
+                    focal: "85mm"
+                }
+            },
+            {
+                id: 3,
+                title: "品牌标识设计",
+                category: "design",
+                description: "为一家科技初创公司设计的品牌标识，简约而富有科技感。",
+                thumbnail: generatePlaceholderUrl('design', 800, 600),
+                images: [
+                    generatePlaceholderUrl('design', 1920, 1080),
+                    generatePlaceholderUrl('design', 1920, 1080),
+                    generatePlaceholderUrl('design', 1920, 1080)
+                ],
+                date: "2023-04-10",
+                location: "工作室项目",
+                tags: ["标志", "品牌", "设计", "极简"]
+            },
+            {
+                id: 4,
+                title: "日落海景",
+                category: "photography",
+                description: "在海边捕捉到的绚丽日落，金色的阳光洒在海面上，形成迷人的色彩。",
+                thumbnail: generatePlaceholderUrl('photography', 800, 1200),
+                images: [
+                    generatePlaceholderUrl('photography', 1920, 1080),
+                    generatePlaceholderUrl('photography', 1920, 1080),
+                    generatePlaceholderUrl('photography', 1920, 1080)
+                ],
+                date: "2023-02-05",
+                location: "青岛海滨",
+                tags: ["风景", "海景", "日落", "自然"],
+                exif: {
+                    camera: "Fujifilm X-T4",
+                    lens: "XF 16-55mm f/2.8",
+                    aperture: "f/5.6",
+                    shutter: "1/250s",
+                    iso: "200",
+                    focal: "23mm"
+                }
+            },
+            {
+                id: 5,
+                title: "移动应用界面设计",
+                category: "design",
+                description: "一款健康类App的用户界面设计，注重用户体验和直观操作。",
+                thumbnail: generatePlaceholderUrl('design', 600, 1200),
+                images: [
+                    generatePlaceholderUrl('design', 1920, 1080),
+                    generatePlaceholderUrl('design', 1920, 1080),
+                    generatePlaceholderUrl('design', 1920, 1080)
+                ],
+                date: "2023-01-15",
+                location: "远程项目",
+                tags: ["UI", "应用", "设计", "健康"]
+            },
+            {
+                id: 6,
+                title: "建筑几何",
+                category: "photography",
+                description: "现代建筑的几何图形与线条，通过黑白摄影突出建筑的结构美。",
+                thumbnail: generatePlaceholderUrl('photography', 900, 700),
+                images: [
+                    generatePlaceholderUrl('photography', 1920, 1080),
+                    generatePlaceholderUrl('photography', 1920, 1080),
+                    generatePlaceholderUrl('photography', 1920, 1080)
+                ],
+                date: "2022-12-18",
+                location: "北京三里屯",
+                tags: ["建筑", "几何", "黑白", "线条"],
+                exif: {
+                    camera: "Nikon Z7 II",
+                    lens: "NIKKOR Z 14-24mm f/2.8 S",
+                    aperture: "f/9.0",
+                    shutter: "1/400s",
+                    iso: "100",
+                    focal: "18mm"
+                }
+            },
+            {
+                id: 7,
+                title: "包装设计",
+                category: "design",
+                description: "为一款有机茶产品设计的包装，结合传统元素与现代审美。",
+                thumbnail: generatePlaceholderUrl('design', 700, 900),
+                images: [
+                    generatePlaceholderUrl('design', 1920, 1080),
+                    generatePlaceholderUrl('design', 1920, 1080),
+                    generatePlaceholderUrl('design', 1920, 1080)
+                ],
+                date: "2023-06-05",
+                location: "工作室项目",
+                tags: ["包装", "设计", "茶叶", "有机"]
+            },
+            {
+                id: 8,
+                title: "花卉微距",
+                category: "photography",
+                description: "微距拍摄的花卉细节，展现自然界的精妙构造。",
+                thumbnail: generatePlaceholderUrl('photography', 800, 800),
+                images: [
+                    generatePlaceholderUrl('photography', 1920, 1080),
+                    generatePlaceholderUrl('photography', 1920, 1080),
+                    generatePlaceholderUrl('photography', 1920, 1080)
+                ],
+                date: "2023-04-25",
+                location: "植物园",
+                tags: ["微距", "花卉", "自然", "细节"],
+                exif: {
+                    camera: "Canon EOS 90D",
+                    lens: "EF 100mm f/2.8L Macro IS USM",
+                    aperture: "f/4.0",
+                    shutter: "1/160s",
+                    iso: "400",
+                    focal: "100mm"
+                }
+            },
+            {
+                id: 9,
+                title: "海报设计系列",
+                category: "design",
+                description: "为电影节设计的系列海报，采用几何抽象风格。",
+                thumbnail: generatePlaceholderUrl('design', 700, 1000),
+                images: [
+                    generatePlaceholderUrl('design', 1920, 1080),
+                    generatePlaceholderUrl('design', 1920, 1080),
+                    generatePlaceholderUrl('design', 1920, 1080)
+                ],
+                date: "2023-05-30",
+                location: "客户项目",
+                tags: ["海报", "电影", "设计", "抽象"]
+            }
+        ];
+
+        // 选择DOM元素
+        const categoryFilters = document.querySelectorAll('.category-filters .filter-btn');
+        const viewButtons = document.querySelectorAll('.view-toggle .view-btn');
+        const waterfallView = document.getElementById('waterfall-view');
+        const gridView = document.getElementById('grid-view');
+        const modal = document.getElementById('details-modal');
+        const lightbox = document.getElementById('lightbox');
+        
+        // 初始化Masonry瀑布流布局
+        function initializeMasonry() {
+            // 清空现有内容
+            waterfallView.innerHTML = '';
+            
+            // 创建瀑布流列
+            const columns = [];
+            const columnCount = getColumnCount();
+            
+            for (let i = 0; i < columnCount; i++) {
+                const column = document.createElement('div');
+                column.className = 'waterfall-column';
+                waterfallView.appendChild(column);
+                columns.push(column);
+            }
+            
+            // 根据筛选条件获取当前应显示的作品
+            const activeFilter = document.querySelector('.category-filters .filter-btn.active').getAttribute('data-filter');
+            const filteredItems = activeFilter === 'all' 
+                ? portfolioData 
+                : portfolioData.filter(item => item.category === activeFilter);
+            
+            // 将作品项添加到瀑布流列中
+            filteredItems.forEach((item, index) => {
+                const column = columns[index % columns.length];
+                const itemElement = createWaterfallItem(item);
+                column.appendChild(itemElement);
+            });
+        }
+        
+        // 获取当前窗口宽度下应显示的列数
+        function getColumnCount() {
+            const width = window.innerWidth;
+            if (width < 576) return 1; // 手机端显示1列
+            if (width < 768) return 2; // 平板竖屏显示2列
+            if (width < 992) return 3; // 平板横屏显示3列
+            if (width < 1200) return 4; // 小型桌面显示4列
+            if (width < 1600) return 6; // 中型桌面显示6列
+            return 9; // 大型桌面显示9列
+        }
+        
+        // 创建瀑布流项目
+        function createWaterfallItem(item) {
+            const element = document.createElement('div');
+            element.className = `waterfall-item ${item.category} figma-card`;
+            element.setAttribute('data-id', item.id);
+            
+            // 判断是否为精选项目
+            const isFeatured = item.featured || Math.random() > 0.7; // 随机将一些项目标记为精选
+            
+            // 构建HTML内容 - 应用Figma风格并添加懒加载
+            element.innerHTML = `
+                <div class="waterfall-image">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3C/svg%3E" data-src="${item.thumbnail}" alt="${item.title}" class="lazy-image" loading="lazy">
+                    ${isFeatured ? '<span class="figma-badge">精选</span>' : ''}
+                    <div class="image-overlay">
+                        <button class="preview-btn figma-button"><i class="fas fa-search-plus"></i></button>
+                        <button class="details-btn figma-button outlined"><i class="fas fa-info-circle"></i></button>
+                    </div>
+                </div>
+                <div class="waterfall-info">
+                    <h3>${item.title}</h3>
+                    <p class="waterfall-description">${limitText(item.description, 80)}</p>
+                    <div class="waterfall-meta">
+                        <span><i class="fas fa-tag"></i> ${formatCategory(item.category)}</span>
+                        <span><i class="fas fa-calendar-alt"></i> ${formatDate(item.date)}</span>
+                    </div>
+                </div>
+            `;
+            
+            // 添加事件监听器
+            element.querySelector('.preview-btn').addEventListener('click', (e) => {
+                e.stopPropagation();
+                openLightbox(item);
+            });
+            
+            element.querySelector('.details-btn').addEventListener('click', (e) => {
+                e.stopPropagation();
+                openModal(item);
+            });
+            
+            // 点击整个项目也打开详情
+            element.addEventListener('click', () => {
+                openModal(item);
+            });
+            
+            return element;
+        }
+        
+        // 打开图片预览蒙层
+        function openLightbox(item) {
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+            
+            lightboxImg.src = item.images[0];
+            lightboxCaption.textContent = item.title;
+            lightbox.setAttribute('data-id', item.id);
+            lightbox.classList.add('show');
+            document.body.style.overflow = 'hidden';
+            
+            setupLightboxNavigation(item);
+        }
+        
+        // 设置蒙层导航
+        function setupLightboxNavigation(item) {
+            const prevBtn = document.querySelector('.lightbox-prev');
+            const nextBtn = document.querySelector('.lightbox-next');
+            
+            // 获取当前显示的图片索引
+            let currentImageIndex = 0;
+            
+            function showImage(index) {
+                if (index < 0) index = item.images.length - 1;
+                if (index >= item.images.length) index = 0;
+                
+                document.getElementById('lightbox-img').src = item.images[index];
+                currentImageIndex = index;
+            }
+            
+            prevBtn.onclick = (e) => {
+                e.stopPropagation();
+                showImage(currentImageIndex - 1);
+            };
+            
+            nextBtn.onclick = (e) => {
+                e.stopPropagation();
+                showImage(currentImageIndex + 1);
+            };
+            
+            // 键盘导航
+            window.addEventListener('keydown', handleKeyDown);
+            
+            function handleKeyDown(e) {
+                if (!lightbox.classList.contains('show')) return;
+                
+                if (e.key === 'ArrowLeft') {
+                    showImage(currentImageIndex - 1);
+                } else if (e.key === 'ArrowRight') {
+                    showImage(currentImageIndex + 1);
+                } else if (e.key === 'Escape') {
+                    closeLightbox();
+                }
+            }
+            
+            // 关闭时移除事件监听
+            document.querySelector('.close-lightbox').onclick = () => {
+                closeLightbox();
+                window.removeEventListener('keydown', handleKeyDown);
+            };
+            
+            lightbox.onclick = (e) => {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                    window.removeEventListener('keydown', handleKeyDown);
+                }
+            };
+        }
+        
+        // 关闭蒙层
+        function closeLightbox() {
+            lightbox.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+        
+        // 打开作品详情模态框
+        function openModal(item) {
+            // 填充模态框内容
+            document.getElementById('modal-title').textContent = item.title;
+            document.querySelector('.modal-category').textContent = formatCategory(item.category);
+            document.querySelector('.modal-date').textContent = formatDate(item.date);
+            document.getElementById('modal-desc').textContent = item.description;
+            document.getElementById('modal-location').textContent = item.location;
+            document.getElementById('modal-date-detail').textContent = formatDate(item.date);
+            
+            // 设置主图
+            const modalMainImage = document.querySelector('.modal-main-image');
+            modalMainImage.src = item.images[0];
+            modalMainImage.alt = item.title;
+            
+            // 生成缩略图
+            const thumbnailsContainer = document.querySelector('.modal-thumbnails');
+            thumbnailsContainer.innerHTML = '';
+            item.images.forEach((img, index) => {
+                const thumb = document.createElement('div');
+                thumb.className = `thumbnail${index === 0 ? ' active' : ''}`;
+                thumb.innerHTML = `<img src="${img}" alt="缩略图 ${index + 1}">`;
+                thumb.addEventListener('click', () => {
+                    document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+                    thumb.classList.add('active');
+                    modalMainImage.src = img;
+                });
+                thumbnailsContainer.appendChild(thumb);
+            });
+            
+            // 生成标签
+            const tagsContainer = document.querySelector('.modal-tags');
+            tagsContainer.innerHTML = '';
+            if (item.tags) {
+                item.tags.forEach(tag => {
+                    const tagEl = document.createElement('span');
+                    tagEl.className = 'tag';
+                    tagEl.textContent = tag;
+                    tagsContainer.appendChild(tagEl);
+                });
+            }
+            
+            // 处理EXIF信息
+            const exifContainer = document.getElementById('exif-container');
+            if (item.category === 'photography' && item.exif) {
+                exifContainer.style.display = 'block';
+                document.getElementById('exif-camera').textContent = item.exif.camera || '-';
+                document.getElementById('exif-lens').textContent = item.exif.lens || '-';
+                document.getElementById('exif-aperture').textContent = item.exif.aperture || '-';
+                document.getElementById('exif-shutter').textContent = item.exif.shutter || '-';
+                document.getElementById('exif-iso').textContent = item.exif.iso || '-';
+                document.getElementById('exif-focal').textContent = item.exif.focal || '-';
+            } else {
+                exifContainer.style.display = 'none';
+            }
+            
+            // 显示模态框
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // 初始化网格视图
+        function initializeGrid() {
+            // 清空现有内容
+            gridView.innerHTML = '';
+            
+            // 根据筛选条件获取当前应显示的作品
+            const activeFilter = document.querySelector('.category-filters .filter-btn.active').getAttribute('data-filter');
+            const filteredItems = activeFilter === 'all' 
+                ? portfolioData 
+                : portfolioData.filter(item => item.category === activeFilter);
+            
+            // 创建网格项
+            filteredItems.forEach(item => {
+                const gridItem = document.createElement('div');
+                gridItem.className = `portfolio-item ${item.category}`;
+                gridItem.setAttribute('data-id', item.id);
+                
+                gridItem.innerHTML = `
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3C/svg%3E" data-src="${item.thumbnail}" alt="${item.title}" class="lazy-image" loading="lazy">
+                    <div class="item-overlay">
+                        <h3>${item.title}</h3>
+                        <p>${limitText(item.description, 60)}</p>
+                        <button class="details-btn" data-id="${item.id}">查看详情</button>
+                    </div>
+                `;
+                
+                gridView.appendChild(gridItem);
+                
+                // 添加点击事件
+                gridItem.addEventListener('click', () => {
+                    openModal(item);
+                });
+            });
+            
+            // 初始化懒加载
+            initLazyLoading();
+        }
+        
+        // 增强的懒加载功能
+        function initLazyLoading() {
+            const lazyImages = document.querySelectorAll('.lazy-image');
+            
+            if ('IntersectionObserver' in window) {
+                // 配置预加载的观察器选项 - 提前200px开始加载
+                const observerOptions = {
+                    root: null,
+                    rootMargin: '200px 0px',
+                    threshold: 0.01
+                };
+                
+                const imageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const image = entry.target;
+                            // 创建一个新的图像对象来预加载
+                            const img = new Image();
+                            // 加载完成后替换原始图像
+                            img.onload = function() {
+                                image.src = image.dataset.src;
+                                image.classList.add('loaded');
+                                imageObserver.unobserve(image);
+                            };
+                            img.onerror = function() {
+                                // 如果图像加载失败，尝试使用占位图
+                                console.warn('图片加载失败:', image.dataset.src);
+                                image.src = generatePlaceholderUrl(image.dataset.category || 'photography', 800, 600);
+                                image.classList.add('loaded');
+                                imageObserver.unobserve(image);
+                            };
+                            img.src = image.dataset.src;
+                        }
+                    });
+                }, observerOptions);
+                
+                lazyImages.forEach(image => {
+                    imageObserver.observe(image);
+                });
+            } else {
+                // 回退方案：使用滚动事件进行懒加载
+                const lazyLoad = function() {
+                    const windowHeight = window.innerHeight;
+                    
+                    lazyImages.forEach(image => {
+                        if (image.dataset.src && image.classList.contains('lazy-image')) {
+                            const rect = image.getBoundingClientRect();
+                            // 在图像进入视口前200px就开始加载
+                            if (rect.top <= windowHeight + 200) {
+                                image.src = image.dataset.src;
+                                image.classList.remove('lazy-image');
+                                image.classList.add('loaded');
+                            }
+                        }
+                    });
+                };
+                
+                // 防抖动函数，避免频繁触发滚动事件
+                function debounce(func, wait) {
+                    let timeout;
+                    return function() {
+                        const context = this;
+                        const args = arguments;
+                        clearTimeout(timeout);
+                        timeout = setTimeout(() => {
+                            func.apply(context, args);
+                        }, wait);
+                    };
+                }
+                
+                // 初始加载和滚动时加载
+                lazyLoad();
+                window.addEventListener('scroll', debounce(lazyLoad, 200));
+                window.addEventListener('resize', debounce(lazyLoad, 200));
+            }
+        }
+        
+        // 扫描并加载images文件夹中的图片
+        function loadImagesFromFolder() {
+            // 使用fetch API请求PHP脚本
+            fetch('load-images.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // 如果成功获取图片
+                        const images = data.images;
+                        if (images.length > 0) {
+                            console.log(`已从images文件夹加载${images.length}张图片`);
+                            
+                            // 将获取的图片添加到portfolioData
+                            // 获取当前最大ID
+                            const maxId = Math.max(...portfolioData.map(item => item.id));
+                            
+                            // 添加新图片
+                            images.forEach((image, index) => {
+                                // 确保ID不重复
+                                image.id = maxId + index + 1;
+                                portfolioData.push(image);
+                            });
+                            
+                            // 重新初始化视图
+                            const activeView = document.querySelector('.view-toggle .view-btn.active').getAttribute('data-view');
+                            if (activeView === 'waterfall') {
+                                initializeMasonry();
+                            } else {
+                                initializeGrid();
+                            }
+                        }
+                    } else {
+                        console.error('加载图片失败:', data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('请求加载图片时出错:', error);
+                });
+        }
+        
+        // 辅助函数：限制文本长度
+        function limitText(text, limit) {
+            if (text.length <= limit) return text;
+            return text.substring(0, limit) + '...';
+        }
+        
+        // 辅助函数：格式化分类名称
+        function formatCategory(category) {
+            const categoryMap = {
+                'photography': '摄影',
+                'design': '设计'
+            };
+            return categoryMap[category] || category;
+        }
+        
+        // 辅助函数：格式化日期
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+        }
+        
+        // 事件监听：分类筛选
+        categoryFilters.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // 移除所有按钮的active类
+                categoryFilters.forEach(b => b.classList.remove('active'));
+                // 为当前点击的按钮添加active类
+                btn.classList.add('active');
+                
+                // 重新初始化视图
+                const activeView = document.querySelector('.view-toggle .view-btn.active').getAttribute('data-view');
+                if (activeView === 'waterfall') {
+                    initializeMasonry();
+                } else {
+                    initializeGrid();
+                }
+                
+                // 在分类筛选后重新初始化懒加载
+                setTimeout(initLazyLoading, 100);
+            });
+        });
+        
+        // 事件监听：视图切换
+        viewButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                viewButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const viewType = btn.getAttribute('data-view');
+                if (viewType === 'waterfall') {
+                    waterfallView.classList.add('active-view');
+                    gridView.classList.remove('active-view');
+                    initializeMasonry();
+                } else {
+                    waterfallView.classList.remove('active-view');
+                    gridView.classList.add('active-view');
+                    initializeGrid();
+                }
+                
+                // 在视图切换后重新初始化懒加载
+                setTimeout(initLazyLoading, 100);
+            });
+        });
+        
+        // 关闭模态框
+        document.querySelector('.close-modal').addEventListener('click', () => {
+            modal.classList.remove('show');
+            document.body.style.overflow = '';
+        });
+        
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+        });
+        
+        // 窗口大小改变时重新布局
+        window.addEventListener('resize', () => {
+            if (document.querySelector('.view-toggle .view-btn.active').getAttribute('data-view') === 'waterfall') {
+                initializeMasonry();
+                // 在瀑布流重新布局后重新初始化懒加载
+                setTimeout(initLazyLoading, 200);
+            }
+        });
+        
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            updateSliderImages();
+            updateAboutImage();
+            initializeMasonry();
+            initializeGrid();
+            initLazyLoading();
+            loadImagesFromFolder();
+        });
+
+        // 更新轮播图图片
+        function updateSliderImages() {
+            document.querySelector('.slide:nth-child(1) img').src = generatePlaceholderUrl('photography', 1920, 1080);
+            document.querySelector('.slide:nth-child(2) img').src = generatePlaceholderUrl('photography', 1920, 1080);
+            document.querySelector('.slide:nth-child(3) img').src = generatePlaceholderUrl('design', 1920, 1080);
+        }
+
+        // 更新关于页面图片
+        function updateAboutImage() {
+            document.querySelector('.about-image img').src = generatePlaceholderUrl('portrait', 600, 800);
+        }
+
+        // 平滑滚动到锚点
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // 关闭移动端菜单
+                    document.querySelector('.nav-menu').classList.remove('active');
+                }
+            });
+        });
+
+        // 切换激活的导航项
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const scrollPosition = window.scrollY + 100;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    document.querySelector('.nav-menu a.active').classList.remove('active');
+                    document.querySelector(`.nav-menu a[href="#${sectionId}"]`).classList.add('active');
+                }
+            });
+        });
+
+        // 监听图片加载
+        function handleImageLoad() {
+            document.addEventListener('DOMContentLoaded', function() {
+                document.addEventListener('load', function(e) {
+                    if (e.target.tagName === 'IMG' && e.target.classList.contains('lazy-image')) {
+                        e.target.classList.add('loaded');
+                    }
+                }, true); // 捕获阶段
+            });
+        }
+        
+        // 初始化图片加载监听
+        handleImageLoad();
+    </script>
+</body>
+</html> 
