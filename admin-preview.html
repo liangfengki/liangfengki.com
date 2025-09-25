@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后台管理平台预览</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.6;
+            color: #333;
+        }
+        h1 {
+            color: #1677ff;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .card {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+        .card h2 {
+            margin-top: 0;
+            color: #333;
+            border-bottom: 2px solid #1677ff;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        a {
+            color: #1677ff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .button {
+            display: inline-block;
+            background-color: #1677ff;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            margin-top: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #4096ff;
+            text-decoration: none;
+        }
+        .button.secondary {
+            background-color: #6c757d;
+        }
+        .button.secondary:hover {
+            background-color: #5a6268;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .stat-card {
+            background: white;
+            padding: 1rem;
+            border-radius: 6px;
+            border: 1px solid #e9ecef;
+            text-align: center;
+        }
+        .stat-card h3 {
+            margin: 0 0 0.5rem 0;
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: normal;
+        }
+        .stat-card .value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #1677ff;
+        }
+        .stat-card .change {
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+        }
+        .stat-card .change.positive {
+            color: #52c41a;
+        }
+        .stat-card .change.negative {
+            color: #ff4d4f;
+        }
+        .activities {
+            background: white;
+            border-radius: 6px;
+            border: 1px solid #e9ecef;
+            overflow: hidden;
+        }
+        .activity-item {
+            padding: 1rem;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        .activity-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .activity-icon.success {
+            background-color: #f6ffed;
+            color: #52c41a;
+        }
+        .activity-icon.info {
+            background-color: #e6f7ff;
+            color: #1890ff;
+        }
+        .activity-icon.warning {
+            background-color: #fff7e6;
+            color: #faad14;
+        }
+        .activity-content {
+            flex: 1;
+        }
+        .activity-title {
+            font-weight: 500;
+            margin-bottom: 0.2rem;
+        }
+        .activity-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: #666;
+        }
+        .login-form {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .login-form h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d9d9d9;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #1677ff;
+        }
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .status-message {
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .status-message.success {
+            background-color: #f6ffed;
+            color: #52c41a;
+            border: 1px solid #b7eb8f;
+        }
+        .status-message.error {
+            background-color: #fff2f0;
+            color: #ff4d4f;
+            border: 1px solid #ffccc7;
+        }
+    </style>
+</head>
+<body>
+    <h1>后台管理平台预览</h1>
+    
+    <div class="card">
+        <h2>项目信息</h2>
+        <p>项目名称：industrial-energy-storage-website</p>
+        <p>版本：1.0.0</p>
+        <p>描述：工商业储能企业官网与后台管理系统</p>
+    </div>
+    
+    <div class="card" id="login-section">
+        <h2>后台管理平台登录</h2>
+        <div class="login-form">
+            <div id="login-status" class="status-message" style="display: none;"></div>
+            <div class="form-group">
+                <label for="username">用户名</label>
+                <input type="text" id="username" value="admin" placeholder="请输入用户名">
+            </div>
+            <div class="form-group">
+                <label for="password">密码</label>
+                <input type="password" id="password" value="admin" placeholder="请输入密码">
+            </div>
+            <div class="form-actions">
+                <button class="button secondary" onclick="resetLogin()">重置</button>
+                <button class="button" onclick="login()">登录</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card" id="dashboard-section" style="display: none;">
+        <h2>管理仪表盘</h2>
+        
+        <h3>网站统计数据</h3>
+        <div class="grid">
+            <div class="stat-card">
+                <h3>访问人数</h3>
+                <div class="value">1,254</div>
+                <div class="change positive">+12% 较上期</div>
+            </div>
+            <div class="stat-card">
+                <h3>页面浏览</h3>
+                <div class="value">5,689</div>
+                <div class="change positive">+8% 较上期</div>
+            </div>
+            <div class="stat-card">
+                <h3>表单提交</h3>
+                <div class="value">89</div>
+                <div class="change positive">+15% 较上期</div>
+            </div>
+            <div class="stat-card">
+                <h3>新增用户</h3>
+                <div class="value">24</div>
+                <div class="change negative">-2% 较上期</div>
+            </div>
+        </div>
+        
+        <h3 style="margin-top: 2rem;">最近活动</h3>
+        <div class="activities">
+            <div class="activity-item">
+                <div class="activity-icon success">✓</div>
+                <div class="activity-content">
+                    <div class="activity-title">新文章发布</div>
+                    <div class="activity-meta">
+                        <span>《工商业储能解决方案最新进展》</span>
+                        <span>10分钟前</span>
+                    </div>
+                </div>
+            </div>
+            <div class="activity-item">
+                <div class="activity-icon info">i</div>
+                <div class="activity-content">
+                    <div class="activity-title">表单提交</div>
+                    <div class="activity-meta">
+                        <span>来自上海的客户咨询</span>
+                        <span>1小时前</span>
+                    </div>
+                </div>
+            </div>
+            <div class="activity-item">
+                <div class="activity-icon info">i</div>
+                <div class="activity-content">
+                    <div class="activity-title">图片上传</div>
+                    <div class="activity-meta">
+                        <span>上传了5张产品图片</span>
+                        <span>3小时前</span>
+                    </div>
+                </div>
+            </div>
+            <div class="activity-item">
+                <div class="activity-icon success">✓</div>
+                <div class="activity-content">
+                    <div class="activity-title">系统登录</div>
+                    <div class="activity-meta">
+                        <span>管理员登录系统</span>
+                        <span>昨天</span>
+                    </div>
+                </div>
+            </div>
+            <div class="activity-item">
+                <div class="activity-icon warning">!</div>
+                <div class="activity-content">
+                    <div class="activity-title">内容更新</div>
+                    <div class="activity-meta">
+                        <span>更新了首页轮播图</span>
+                        <span>2天前</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 2rem;">
+            <button class="button secondary" onclick="logout()">退出登录</button>
+        </div>
+    </div>
+    
+    <div class="card">
+        <h2>使用说明</h2>
+        <ol>
+            <li>在登录表单中输入用户名和密码（默认：admin/admin）</li>
+            <li>点击登录按钮进入管理仪表盘</li>
+            <li>在仪表盘页面可以查看网站统计数据和最近活动</li>
+            <li>点击退出登录按钮返回登录页面</li>
+        </ol>
+        <p style="margin-top: 1rem;">注意：这是一个模拟的预览页面，展示了后台管理平台的主要功能和界面样式。实际系统需要运行开发服务器才能完整使用。</p>
+    </div>
+    
+    <script>
+        // 登录功能
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const statusElement = document.getElementById('login-status');
+            
+            // 简单的登录验证
+            if (username === 'admin' && password === 'admin') {
+                // 登录成功
+                statusElement.textContent = '登录成功！正在进入仪表盘...';
+                statusElement.className = 'status-message success';
+                statusElement.style.display = 'block';
+                
+                // 模拟登录成功后的跳转
+                setTimeout(() => {
+                    document.getElementById('login-section').style.display = 'none';
+                    document.getElementById('dashboard-section').style.display = 'block';
+                    statusElement.style.display = 'none';
+                }, 1000);
+            } else {
+                // 登录失败
+                statusElement.textContent = '用户名或密码错误，请重试！';
+                statusElement.className = 'status-message error';
+                statusElement.style.display = 'block';
+            }
+        }
+        
+        // 重置登录表单
+        function resetLogin() {
+            document.getElementById('username').value = 'admin';
+            document.getElementById('password').value = 'admin';
+            document.getElementById('login-status').style.display = 'none';
+        }
+        
+        // 确保页面加载时总是显示登录页面，隐藏仪表盘
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('login-section').style.display = 'block';
+            document.getElementById('dashboard-section').style.display = 'none';
+        });
+        
+        // 退出登录
+        function logout() {
+            document.getElementById('dashboard-section').style.display = 'none';
+            document.getElementById('login-section').style.display = 'block';
+            resetLogin();
+        }
+    </script>
+</body>
+</html>

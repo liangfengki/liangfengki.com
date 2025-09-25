@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 基础样式重置 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #f8fafc;
+  color: #1e293b;
+  line-height: 1.6;
+}
+
+/* 自定义工具类 */
+@layer utilities {
+  .content-auto {
+    content-visibility: auto;
+  }
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  .transition-custom {
+    transition: all 0.3s ease;
+  }
+  .hover-scale {
+    @apply hover:scale-105 transition-custom;
+  }
+  .card-shadow {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  .elevated-shadow {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+  .gradient-overlay {
+    background: linear-gradient(to bottom, rgba(30, 58, 138, 0.9), transparent);
+  }
+  .mask-gradient {
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  }
+}
+
+/* 自定义组件类 */
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-white px-6 py-3 rounded-lg font-medium transition-custom hover:bg-primary-dark hover-scale focus:ring-2 focus:ring-primary-light focus:ring-offset-2 focus:outline-none;
+  }
+  .btn-secondary {
+    @apply bg-white text-primary border border-primary px-6 py-3 rounded-lg font-medium transition-custom hover:bg-neutral hover-scale focus:ring-2 focus:ring-primary-light focus:ring-offset-2 focus:outline-none;
+  }
+  .btn-accent {
+    @apply bg-secondary text-white px-6 py-3 rounded-lg font-medium transition-custom hover:bg-secondary-dark hover-scale focus:ring-2 focus:ring-secondary-light focus:ring-offset-2 focus:outline-none;
+  }
+  .section-title {
+    @apply text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-text-dark mb-8 text-center relative;
+  }
+  .section-title::after {
+    content: '';
+    @apply absolute bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-primary rounded-full;
+  }
+  .card {
+    @apply bg-white rounded-lg overflow-hidden shadow-lg transition-custom hover:shadow-xl;
+  }
+  .input-field {
+    @apply w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-custom;
+  }
+  .nav-link {
+    @apply relative px-3 py-2 text-text-dark hover:text-primary transition-custom after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:after:w-full;
+  }
+  .nav-link.active {
+    @apply text-primary after:w-full;
+  }
+}
